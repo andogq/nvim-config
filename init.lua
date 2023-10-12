@@ -218,6 +218,10 @@ vim.o.autoindent = true
 
 vim.o.wrap = false
 
+-- Split direction
+vim.o.splitbelow = true
+vim.o.splitright = true
+
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -369,6 +373,7 @@ require('which-key').register {
   ['<leader>f'] = { name = '[F]ind', _ = 'which_key_ignore' },
   ['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
   ['<leader>l'] = { name = '[L]ist', _ = 'which_key_ignore' },
+  ['<leader>s'] = { name = '[S]plit pane', _ = 'which_key_ignore' },
 }
 
 -- mason-lspconfig requires that these setup functions are called in this order
