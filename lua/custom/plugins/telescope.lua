@@ -90,6 +90,11 @@ return {
                     tb.resume,
                     desc = '[F]ind [R]esume'
                 },
+                {
+                    '<leader>fm',
+                    tb.marks,
+                    desc = '[F]ind [M]arks',
+                }
             }
         end,
     },

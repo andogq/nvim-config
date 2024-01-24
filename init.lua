@@ -50,6 +50,13 @@ require('lazy').setup({
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
     },
+    init = function()
+      local signs = { Error = "󰅚 ", Warn = "󰀪 ", Hint = "󰌶 ", Info = " " }
+      for type, icon in pairs(signs) do
+        local hl = "DiagnosticSign" .. type
+        vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+      end
+    end
   },
 
   {
@@ -69,19 +76,12 @@ require('lazy').setup({
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',  opts = {} },
   {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
       -- See `:help gitsigns.txt`
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
       on_attach = function(bufnr)
         vim.keymap.set('n', '<leader>hp', require('gitsigns').preview_hunk, { buffer = bufnr, desc = 'Preview git hunk' })
 
@@ -113,10 +113,23 @@ require('lazy').setup({
     'folke/tokyonight.nvim',
     lazy = false,
     priority = 1000,
-    opts = {},
-    config = function()
-      vim.cmd.colorscheme 'tokyonight'
-    end,
+    opts = {
+      style = "moon",
+      light_style = "day",
+
+      ---@param highlights Highlights
+      ---@param colors ColorScheme
+      on_highlights = function(highlights, colors)
+        highlights.CursorLineNr = {
+          bg = colors.bg_highlight,
+          bold = true,
+        }
+        highlights.LineNr = {
+          fg = colors.fg_sidebar,
+          bold = false,
+        }
+      end
+    },
   },
 
   {
@@ -126,7 +139,6 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = true,
-        theme = 'tokyonight',
         component_separators = '|',
         section_separators = '',
       },
@@ -157,7 +169,7 @@ require('lazy').setup({
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
-  -- require 'kickstart.plugins.autoformat',
+  require 'kickstart.plugins.autoformat',
   -- require 'kickstart.plugins.debug',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
@@ -249,7 +261,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 vim.defer_fn(function()
   require('nvim-treesitter.configs').setup {
     -- Add languages to be installed here that you want installed for treesitter
-    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim', 'bash' },
+    ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'javascript', 'typescript', 'vimdoc', 'vim',
+      'bash' },
 
     -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
     auto_install = true,
@@ -403,6 +416,40 @@ local servers = {
       telemetry = { enable = false },
     },
   },
+
+  rust_analyzer = {
+    keys = {
+      { "K",          "<cmd>RustHoverActions<cr>", desc = "Hover Actions (Rust)" },
+      { "<leader>cR", "<cmd>RustCodeAction<cr>",   desc = "Code Action (Rust)" },
+      { "<leader>dr", "<cmd>RustDebuggables<cr>",  desc = "Run Debuggables (Rust)" },
+    },
+    settings = {
+      ["rust-analyzer"] = {
+        cargo = {
+          allFeatures = true,
+          loadOutDirsFromCheck = true,
+          runBuildScripts = true,
+        },
+        checkOnSave = {
+          allFeatures = true,
+          command = "clippy",
+          extraArgs = { "--no-deps" },
+        },
+        procMacro = {
+          enable = true,
+          ignored = {
+            ["async-trait"] = { "async_trait" },
+            ["napi-derive"] = { "napi" },
+            ["async-recursion"] = { "async_recursion" },
+          },
+        },
+      },
+    },
+  },
+
+  clangd = {
+    filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
+  },
 }
 
 -- Setup neovim lua configuration
@@ -477,6 +524,12 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+cmp.event:on('confirm_done', require('nvim-autopairs.completion.cmp').on_confirm_done())
+
+vim.cmd.colorscheme 'tokyonight'
+
+vim.o.cursorline = true;
+vim.o.cursorlineopt = "both";
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
