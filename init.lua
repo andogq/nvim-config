@@ -475,6 +475,25 @@ mason_lspconfig.setup_handlers {
       filetypes = (servers[server_name] or {}).filetypes,
     }
   end,
+  ["svelte"] = function()
+    require('lspconfig').svelte.setup({
+      capabilities = capabilities,
+      on_attach = function(client, bufnr)
+        vim.api.nvim_create_autocmd("BufWritePost", {
+          pattern = { "*.js", "*.ts" },
+          callback = function(ctx)
+            if client.name == "svelte" then
+              client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.file })
+            end
+          end,
+        });
+
+        on_attach(client, bufnr);
+      end,
+      settings = servers.svelte,
+      filetypes = (servers.svelte or {}).filetypes,
+    })
+  end
 }
 
 -- [[ Configure nvim-cmp ]]
@@ -530,6 +549,7 @@ vim.cmd.colorscheme 'tokyonight'
 
 vim.o.cursorline = true;
 vim.o.cursorlineopt = "both";
+vim.o.scrolloff = 20;
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

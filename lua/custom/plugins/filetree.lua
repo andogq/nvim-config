@@ -13,25 +13,31 @@ return {
         keys = {
             {
                 '\\',
-                function ()
+                function()
                     require('neo-tree.command').execute({ reveal = true, toggle = true })
                 end,
                 desc = 'Toggle file tree at current file'
             },
             {
                 '<leader>lf',
-                function ()
+                function()
                     require('neo-tree.command').execute({ reveal = true })
                 end,
                 desc = '[L]ist [f]iles in Neotree',
             },
             {
                 '<leader>lg',
-                function ()
+                function()
                     require('neo-tree.command').execute({ reveal = true, source = 'git_status' })
                 end,
                 desc = '[L]ist [g]it changes in Neotree',
             },
+        },
+        opts = {
+            git_status_async = true,
+            filesystem = {
+                use_libuv_file_watcher = true,
+            }
         }
     },
 }

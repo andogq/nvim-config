@@ -95,5 +95,74 @@ return {
             require('nvim-treesitter.install').compilers = { 'gcc-11' }
             require('tree-sitter-just').setup({})
         end
+    },
+    {
+        'folke/zen-mode.nvim',
+        opts = {
+            options = {
+                signcolumn = "yes",
+                relativenumber = true,
+                cursorline = true,
+            }
+        },
+        keys = {
+            { '<leader>z', function() require('zen-mode').toggle() end },
+        },
+    },
+    {
+        'Aasim-A/scrollEOF.nvim',
+        event = { 'CursorMoved', 'WinScrolled' },
+        opts = {}
+    },
+    {
+        'stevearc/conform.nvim',
+        opts = {
+            format_on_save = {
+                timeout_ms = 500,
+                lsp_fallback = true,
+            },
+            formatters_by_ft = {
+                javascript = { "prettierd", },
+                javascriptreact = { "prettierd", },
+                python = { "ruff" },
+                typescript = { "prettierd", },
+                typescriptreact = { "prettierd", },
+            },
+        },
+    },
+    {
+        'mfussenegger/nvim-lint',
+        event = { "BufReadPre", "BufNewFile" },
+        config = function()
+            local lint = require("lint")
+
+            lint.linters_by_ft = {
+                javascript = { "eslint" },
+                javascriptreact = { "eslint" },
+                python = { "ruff", "flake8" },
+                typescript = { "eslint" },
+                typescriptreact = { "eslint" },
+            }
+
+            vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+                callback = function()
+                    lint.try_lint()
+                end,
+            })
+        end,
+    },
+    {
+        "ray-x/go.nvim",
+        dependencies = { -- optional packages
+            "ray-x/guihua.lua",
+            "neovim/nvim-lspconfig",
+            "nvim-treesitter/nvim-treesitter",
+        },
+        config = function()
+            require("go").setup()
+        end,
+        event = { "CmdlineEnter" },
+        ft = { "go", 'gomod' },
+        build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
     }
 }
