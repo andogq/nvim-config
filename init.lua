@@ -27,7 +27,16 @@ vim.opt.rtp:prepend(lazypath)
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
   -- Git related plugins
-  'tpope/vim-fugitive',
+  {
+    'tpope/vim-fugitive',
+    keys = {
+      {
+        '<leader>g',
+        '<cmd>Git<cr>',
+        desc = "Open fugitive",
+      }
+    }
+  },
   'tpope/vim-rhubarb',
 
   -- Detect tabstop and shiftwidth automatically
@@ -544,6 +553,12 @@ cmp.setup {
   },
 }
 cmp.event:on('confirm_done', require('nvim-autopairs.completion.cmp').on_confirm_done())
+cmp.setup.filetype({ "sql" }, {
+  sources = {
+    { name = "vim-dadbod-completion" },
+    { name = "buffer" },
+  },
+})
 
 vim.cmd.colorscheme 'tokyonight'
 

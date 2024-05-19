@@ -54,23 +54,28 @@ return {
         keys = {
             {
                 "<leader>xx",
-                function() require("trouble").toggle() end
+                function() require("trouble").toggle() end,
+                desc = "Toggle trouble"
             },
             {
                 "<leader>xw",
-                function() require("trouble").toggle("workspace_diagnostics") end
+                function() require("trouble").toggle("workspace_diagnostics") end,
+                desc = "Workspace diagnostics"
             },
             {
                 "<leader>xd",
-                function() require("trouble").toggle("document_diagnostics") end
+                function() require("trouble").toggle("document_diagnostics") end,
+                desc = "Document diagnostics"
             },
             {
                 "<leader>xq",
-                function() require("trouble").toggle("quickfix") end
+                function() require("trouble").toggle("quickfix") end,
+                desc = "Quickfix list"
             },
             {
                 "<leader>xl",
-                function() require("trouble").toggle("loclist") end
+                function() require("trouble").toggle("loclist") end,
+                desc = "Location list"
             },
         },
     },
