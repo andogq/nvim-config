@@ -35,9 +35,32 @@ return {
         },
         opts = {
             git_status_async = true,
+            follow_current_file = {
+                enabled = true,
+            },
             filesystem = {
+                bind_to_cwd = true,    -- true creates a 2-way binding between vim's cwd and neo-tree's root
+                cwd_target = {
+                    sidebar = "tab",   -- sidebar is when position = left or right
+                    current = "window" -- current is when position = current
+                },
                 use_libuv_file_watcher = true,
+                hijack_netrw_behavior = "open_current",
             }
         }
     },
+    {
+        "stevearc/oil.nvim",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        ---@module 'oil'
+        ---@type oil.SetupOpts
+        opts = {},
+        keys = {
+            {
+                "-",
+                desc = "Open parent directory in oil.nvim",
+                "<cmd>Oil<cr>",
+            }
+        }
+    }
 }

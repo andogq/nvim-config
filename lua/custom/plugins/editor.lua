@@ -49,7 +49,7 @@ return {
         dependencies = { 'nvim-tree/nvim-web-devicons' },
         opts = {
             icons = true,
-            use_lsp_diagnostic_signs = false,
+            use_lsp_diagnostic_signs = true,
         },
         keys = {
             {
@@ -111,7 +111,7 @@ return {
             }
         },
         keys = {
-            { '<leader>z', function() require('zen-mode').toggle() end },
+            { '<leader>z', desc = "Toggle zen mode", function() require('zen-mode').toggle() end },
         },
     },
     {
@@ -156,18 +156,19 @@ return {
             })
         end,
     },
-    {
-        "ray-x/go.nvim",
-        dependencies = { -- optional packages
-            "ray-x/guihua.lua",
-            "neovim/nvim-lspconfig",
-            "nvim-treesitter/nvim-treesitter",
-        },
-        config = function()
-            require("go").setup()
-        end,
-        event = { "CmdlineEnter" },
-        ft = { "go", 'gomod' },
-        build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
-    }
+    -- WARN: This plugin messes with diagnostic signs
+    -- {
+    --     "ray-x/go.nvim",
+    --     dependencies = { -- optional packages
+    --         "ray-x/guihua.lua",
+    --         "neovim/nvim-lspconfig",
+    --         "nvim-treesitter/nvim-treesitter",
+    --     },
+    --     config = function()
+    --         require("go").setup()
+    --     end,
+    --     event = { "CmdlineEnter" },
+    --     ft = { "go", 'gomod' },
+    --     build = ':lua require("go.install").update_all_sync()' -- if you need to install/update all binaries
+    -- }
 }

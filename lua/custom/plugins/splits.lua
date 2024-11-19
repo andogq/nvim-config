@@ -10,7 +10,7 @@ return {
             local ss = require('smart-splits')
 
             local function wrap(resize)
-                return function ()
+                return function()
                     -- Perform resize
                     resize()
 
@@ -71,11 +71,11 @@ return {
                 trigger_events = { "VimResized" },
             },
         },
-        keys = function ()
+        keys = function()
             local b = require("bufresize")
 
             local function wrap(cmd)
-                return function ()
+                return function()
                     vim.cmd(':' .. cmd)
                     b.register()
                 end
