@@ -242,7 +242,7 @@ require('lazy').setup({
       { "<leader>r_", hidden = true },
       { "<leader>s",  group = "[S]plit pane" },
       { "<leader>s_", hidden = true },
-      { "<leader>t",  group = "[T]ab" },
+      { "<leader>t",  group = "[T]erminal" },
       { "<leader>t_", hidden = true },
       { "<leader>w",  group = "[W]orkspace" },
       { "<leader>w_", hidden = true },
@@ -452,8 +452,9 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
--- [[ Configure LSP ]]
---  This function gets run when an LSP connects to a particular buffer.
+-- Terminal configration
+vim.keymap.set("n", "<leader>tt", "<cmd>terminal<cr>i", { desc = "Launch terminal in insert mode" })
+vim.keymap.set("t", "<C-space>", [[<C-\><C-n>]], { desc = "Exit insert mode in terminal", silent = true, noremap = true })
 
 -- NOTE: Really bad way to share
 vim.g.ando = {
@@ -485,7 +486,6 @@ cmp.setup {
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete {},
     ['<CR>'] = cmp.mapping.confirm {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
