@@ -111,18 +111,22 @@ end
 --  You can also configure plugins after the setup call,
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
-  -- Git related plugins
   {
-    'tpope/vim-fugitive',
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+    config = true,
     keys = {
       {
         '<leader>g',
-        '<cmd>Git<cr>',
-        desc = "Open fugitive",
+        function() require("neogit").open({ kind = "auto" }) end,
+        desc = "Open neogit",
       }
     }
   },
-  'tpope/vim-rhubarb',
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
