@@ -102,6 +102,28 @@ return {
                     wrap('close'),
                     desc = 'Close the current pane',
                 },
+
+                -- Shortcut for split creation
+                {
+                    "<C-A-l>",
+                    wrap("vsplit"),
+                    desc = "Create a split to the right"
+                },
+                {
+                    "<C-A-k>",
+                    wrap("above split"),
+                    desc = "Create a split above"
+                },
+                {
+                    "<C-A-j>",
+                    wrap("split"),
+                    desc = "Create a split below"
+                },
+                {
+                    "<C-A-h>",
+                    wrap("leftabove vsplit"),
+                    desc = "Create a split to the left"
+                },
             }
         end
     }
