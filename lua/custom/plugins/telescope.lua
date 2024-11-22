@@ -111,7 +111,9 @@ return {
                 "<leader>fp",
                 desc = "[F]ind [P]roject",
                 function()
-                    require("telescope").extensions.project.project({})
+                    require("telescope").extensions.project.project({
+                        hide_workspace = true,
+                    })
                 end
             }
         }
