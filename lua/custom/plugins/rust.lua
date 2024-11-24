@@ -46,6 +46,28 @@ return {
                 load_vscode_settings = true,
             }
         },
+        keys = {
+            {
+                "<leader>rs",
+                desc = "Select Rust Runnable",
+                function() vim.cmd.RustLsp("runnables") end,
+            },
+            {
+                "<leader>rr",
+                desc = "Run Last Rust Runnable",
+                function() vim.cmd.RustLsp({ "runnables", bang = true }) end,
+            },
+            {
+                "<leader>rc",
+                desc = "Run Target from Cursor",
+                function() vim.cmd.RustLsp("run") end,
+            },
+            {
+                "<leader>rd",
+                desc = "Open docs.rs for symbol at cursor",
+                function() vim.cmd.RustLsp("openDocs") end,
+            },
+        },
         config = function(_, opts)
             vim.g.rustaceanvim = vim.tbl_deep_extend("force",
                 {},
