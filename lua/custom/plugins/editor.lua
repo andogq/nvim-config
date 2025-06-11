@@ -104,10 +104,17 @@ return {
     {
         'folke/zen-mode.nvim',
         opts = {
-            options = {
-                signcolumn = "yes",
-                relativenumber = true,
-                cursorline = true,
+            window = {
+                options = {
+                    signcolumn = "yes",
+                    relativenumber = true,
+                    cursorline = true,
+                }
+            },
+            plugins = {
+                gitsigns = {
+                    enabled = true
+                }
             }
         },
         keys = {
@@ -123,14 +130,14 @@ return {
         'stevearc/conform.nvim',
         opts = {
             format_on_save = {
-                timeout_ms = 500,
+                timeout_ms = 1000,
             },
             formatters_by_ft = {
-                javascript = { "prettierd", },
-                javascriptreact = { "prettierd", },
+                javascript = { "eslint_d", "prettierd", stop_after_first = true, },
+                javascriptreact = { "eslint_d", "prettierd", stop_after_first = true, },
                 python = { "ruff" },
-                typescript = { "prettierd", },
-                typescriptreact = { "prettierd", },
+                typescript = { "eslint_d", "prettierd", stop_after_first = true, },
+                typescriptreact = { "eslint_d", "prettierd", stop_after_first = true, },
             },
         },
     },

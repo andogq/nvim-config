@@ -26,8 +26,23 @@ return {
                     },
                 },
             },
+            extensions = {
+                -- project = {
+                --     on_project_selected = function(prompt_bufnr)
+                --         -- Try restore the session
+                --         local session_manager = require("session_manager")
+                --         if session_manager.load_git_session() then
+                --             return
+                --         end
+                --
+                --         -- Otherwise, allow for choosing a file
+                --         local project_actions = require("telescope._extensions.project.actions")
+                --         project_actions.find_project_files(prompt_bufnr, false)
+                --     end
+                -- }
+            }
         },
-        config = function()
+        init = function()
             pcall(require('telescope').load_extension, 'fzf')
         end,
         keys = function()

@@ -112,11 +112,16 @@ require('lazy').setup({
       "sindrets/diffview.nvim",
       "nvim-telescope/telescope.nvim",
     },
-    config = true,
+    opts = {
+      kind = "floating",
+      commit_editor = {
+        kind = "floating",
+      },
+    },
     keys = {
       {
         '<leader>g',
-        function() require("neogit").open({ kind = "auto" }) end,
+        function() require("neogit").open({ kind = "floating" }) end,
         desc = "Open neogit",
       }
     }
@@ -453,6 +458,8 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- Terminal configration
 vim.keymap.set("n", "<leader>tt", "<cmd>terminal<cr>i", { desc = "Launch terminal in insert mode" })
 vim.keymap.set("t", "<C-space>", [[<C-\><C-n>]], { desc = "Exit insert mode in terminal", silent = true, noremap = true })
+vim.keymap.set("t", "<S-Enter>", "<Enter>", { desc = "Insert enter" })
+vim.keymap.set("t", "<S-Space>", "<Space>", { desc = "Insert space" })
 
 -- NOTE: Really bad way to share
 vim.g.ando = {
@@ -524,7 +531,8 @@ vim.cmd.colorscheme 'tokyonight'
 
 vim.o.cursorline = true;
 vim.o.cursorlineopt = "both";
-vim.o.scrolloff = 10;
+-- vim.o.scrolloff = 10;
+vim.o.laststatus = 3 -- Use a single status line for all windows
 
 vim.diagnostic.config({
   underline = true,
