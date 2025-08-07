@@ -14,10 +14,11 @@ return {
     },
     keys = {
       {
-        '<leader>g',
+        '<leader>gg',
         function()
           require('neogit').open()
         end,
+        desc = 'Open neogit',
       },
     },
   },
