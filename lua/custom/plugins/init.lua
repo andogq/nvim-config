@@ -4,5 +4,7 @@
 -- See the kickstart.nvim README for more information
 return {
   { import = 'custom.plugins.editor' },
+  { import = 'custom.plugins.file-system' },
   { import = 'custom.plugins.git' },
+  { import = 'custom.plugins.ui' },
 }
