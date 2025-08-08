@@ -3,6 +3,7 @@ return {
   opts = {
     explorer = {},
     gitbrowse = {},
+    indent = {},
     notifier = {},
     picker = {
       sources = {
