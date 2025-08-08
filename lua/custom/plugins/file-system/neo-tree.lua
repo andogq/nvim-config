@@ -14,7 +14,7 @@ return {
     { '\\', ':Neotree reveal<CR>', desc = 'NeoTree reveal', silent = true },
   },
   opts = {
-    git_status_async = true,
+    git_status_async = false,
     follow_current_file = {
       enabled = true,
     },
