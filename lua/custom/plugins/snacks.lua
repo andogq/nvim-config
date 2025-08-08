@@ -2,6 +2,7 @@ return {
   'folke/snacks.nvim',
   opts = {
     explorer = {},
+    gitbrowse = {},
     notifier = {},
     picker = {
       sources = {
@@ -12,6 +13,96 @@ return {
     },
   },
   keys = {
+    -- Explorer keys
+    {
+      '\\',
+      function()
+        Snacks.explorer.reveal()
+      end,
+    },
+
+    -- Git browse keys
+    {
+      '<leader>gob',
+      function()
+        Snacks.gitbrowse.open { what = 'branch' }
+      end,
+      desc = 'Open [b]ranch in browser',
+    },
+    {
+      '<leader>goc',
+      function()
+        -- NOTE: This is copied from `snacks.nvim/lua/snacks/gitbrowse.lua`
+        local function get_commit()
+          -- Get the file and directory inforamtion
+          local file = vim.api.nvim_buf_get_name(0) ---@type string?
+          file = file and (vim.uv.fs_stat(file) or {}).type == 'file' and svim.fs.normalize(file) or nil
+          local cwd = file and vim.fn.fnamemodify(file, ':h') or vim.fn.getcwd()
+
+          -- Query git to determine the last commit in the file
+          local git_output = vim.fn.system({ 'git', '-C', cwd, 'log', '-n', '1', '--pretty=format:%H', '--', file }, 'Failed to get latest commit of file')
+          local commit = vim.split(vim.trim(git_output), '\n')[1]
+
+          return commit
+        end
+
+        -- NOTE: This is copied from https://github.com/folke/snacks.nvim/discussions/1970#discussioncomment-13452975
+        local function open_commit(commit)
+          -- `gitbrowse` uses `vim.fn.expand` to expand the word under the cursor to check if it's
+          -- a commit hash. This function is patched so that it returns the determined commit hash
+          -- instead.
+          local expand = vim.fn.expand
+          vim.fn.expand = function(what, ...) ---@diagnostic disable-line
+            if what == '<cword>' then
+              return commit or expand(what, ...)
+            end
+
+            return expand(what, ...)
+          end
+
+          -- Call out to the real implementation
+          Snacks.gitbrowse.open { what = 'commit' }
+
+          -- Restore the patch
+          vim.fn.expand = expand
+        end
+
+        local commit = get_commit()
+        open_commit(commit)
+      end,
+      desc = 'Open [c]ommit in browser',
+    },
+    {
+      '<leader>gof',
+      function()
+        Snacks.gitbrowse.open { what = 'file' }
+      end,
+      desc = 'Open [f]ile in browser',
+    },
+    {
+      '<leader>gol',
+      function()
+        Snacks.gitbrowse.open { what = 'permalink' }
+      end,
+      desc = 'Open [l]ink in browser',
+    },
+    {
+      '<leader>gor',
+      function()
+        Snacks.gitbrowse.open { what = 'repo' }
+      end,
+      desc = 'Open [r]epo in browser',
+    },
+
+    -- Notifier keys
+    {
+      '<leader>nc',
+      function()
+        Snacks.notifier.hide()
+      end,
+      desc = '[C]lear notification',
+    },
+
     -- Picker keys
     {
       '<leader>fh',
@@ -170,14 +261,6 @@ return {
         Snacks.picker.lsp_type_definitions()
       end,
       desc = 'Find LSP workspace [s]ymbols',
-    },
-
-    -- Explorer keys
-    {
-      '\\',
-      function()
-        Snacks.explorer.reveal()
-      end,
     },
   },
 }

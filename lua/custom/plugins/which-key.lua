@@ -50,6 +50,7 @@ return { -- Useful plugin to show you pending keybinds.
       { '<leader>f', group = '[F]ind' },
       { '<leader>fG', group = 'Find [g]it' },
       { '<leader>fl', group = 'Find [L]SP' },
+      { '<leader>n', group = '[N]otifications' },
       { 'g', group = '[G]oto' },
     },
   },
