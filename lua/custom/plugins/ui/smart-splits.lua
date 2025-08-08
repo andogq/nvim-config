@@ -4,7 +4,7 @@ return {
     lazy = false,
     opts = {
       default_amount = 4,
-      ignored_filetypes = { 'neo-tree' },
+      ignored_filetypes = { 'snacks_picker_list' },
     },
     keys = {
       {
@@ -12,6 +12,7 @@ return {
         function()
           require('smart-splits').move_cursor_left()
         end,
+        mode = { 'n', 'i', 'v' },
         desc = 'Select left buffer',
       },
       {
@@ -19,6 +20,7 @@ return {
         function()
           require('smart-splits').move_cursor_down()
         end,
+        mode = { 'n', 'i', 'v' },
         desc = 'Select down buffer',
       },
       {
@@ -26,6 +28,7 @@ return {
         function()
           require('smart-splits').move_cursor_up()
         end,
+        mode = { 'n', 'i', 'v' },
         desc = 'Select up buffer',
       },
       {
@@ -33,6 +36,7 @@ return {
         function()
           require('smart-splits').move_cursor_right()
         end,
+        mode = { 'n', 'i', 'v' },
         desc = 'Select right buffer',
       },
     },

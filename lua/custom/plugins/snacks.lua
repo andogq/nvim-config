@@ -1,7 +1,15 @@
 return {
   'folke/snacks.nvim',
   opts = {
-    picker = {},
+    explorer = {},
+    notifier = {},
+    picker = {
+      sources = {
+        explorer = {
+          auto_close = true,
+        },
+      },
+    },
   },
   keys = {
     -- Picker keys
@@ -60,6 +68,13 @@ return {
         Snacks.picker.resume()
       end,
       desc = 'Find [r]esume',
+    },
+    {
+      '<leader>fn',
+      function()
+        Snacks.picker.notifications()
+      end,
+      desc = 'Find [n]otifications',
     },
     {
       '<leader><leader>',
@@ -155,6 +170,14 @@ return {
         Snacks.picker.lsp_type_definitions()
       end,
       desc = 'Find LSP workspace [s]ymbols',
+    },
+
+    -- Explorer keys
+    {
+      '\\',
+      function()
+        Snacks.explorer.reveal()
+      end,
     },
   },
 }
