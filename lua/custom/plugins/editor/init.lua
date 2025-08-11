@@ -1,3 +1,3 @@
 return {
-  { import = 'custom.plugins.editor.lsp' },
+  { import = 'custom.plugins.editor.language' },
 }
