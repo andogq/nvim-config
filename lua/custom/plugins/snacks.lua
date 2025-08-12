@@ -252,16 +252,16 @@ return {
     {
       '<leader>fls',
       function()
-        Snacks.picker.lsp_type_definitions()
+        Snacks.picker.lsp_workspace_symbols()
       end,
-      desc = 'Find LSP [s]ymbols',
+      desc = 'Find LSP workspace [s]ymbols',
     },
     {
       '<leader>flS',
       function()
-        Snacks.picker.lsp_type_definitions()
+        Snacks.picker.lsp_symbols()
       end,
-      desc = 'Find LSP workspace [s]ymbols',
+      desc = 'Find LSP [s]ymbols',
     },
   },
 }
