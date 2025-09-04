@@ -58,6 +58,13 @@ return {
       desc = '[W]atch closest test',
     },
     {
+      '<leader>td',
+      function()
+        require('neotest').run.run { suite = false, strategy = 'dap' }
+      end,
+      desc = '[D]ebug closest test',
+    },
+    {
       '<leader>ts',
       function()
         require('neotest').summary.toggle()
