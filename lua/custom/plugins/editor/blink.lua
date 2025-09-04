@@ -34,6 +34,9 @@ return { -- Autocompletion
   --- @module 'blink.cmp'
   --- @type blink.cmp.Config
   opts = {
+    enabled = function()
+      return not vim.tbl_contains({ 'dap-repl' }, vim.bo.filetype)
+    end,
     keymap = {
       preset = 'enter',
     },
