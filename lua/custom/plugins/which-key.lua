@@ -45,6 +45,10 @@ return { -- Useful plugin to show you pending keybinds.
     -- Document existing key chains
     spec = {
       { '<leader>a', group = '[A]uto' },
+      { '<leader>d', group = '[D]ebug' },
+      { '<leader>ds', group = '[S]tep' },
+      { '<leader>du', group = '[U]i' },
+      { '<leader>dC', group = '[C]lear' },
       { '<leader>f', group = '[F]ind' },
       { '<leader>fl', group = 'Find [L]SP' },
       { '<leader>fG', group = 'Find [g]it' },
@@ -53,7 +57,9 @@ return { -- Useful plugin to show you pending keybinds.
       { '<leader>n', group = '[N]otifications' },
       { '<leader>r', group = '[R]ust' },
       { '<leader>s', group = '[S]plit' },
-      { '<leader>t', group = '[T]oggle' },
+      { '<leader>t', group = '[T]est' },
+      { '<leader>tc', group = '[C]losest test' },
+      { '<leader>tf', group = '[F]ile test' },
       { 'g', group = '[G]oto' },
     },
   },
