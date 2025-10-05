@@ -13,6 +13,10 @@ return {
       typescriptreact = { 'eslint_d' },
     }
 
+    -- Args are `lint [...options]` by default. Insert `en-AU` (and `en-GB` as the fallback) as the
+    -- locale, after the `lint` command.
+    table.insert(lint.linters.cspell.args, 2, '--locale=en-AU,en-GB')
+
     local lint_augroup = vim.api.nvim_create_augroup('lint', { clear = true })
     vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePost', 'InsertLeave' }, {
       group = lint_augroup,
