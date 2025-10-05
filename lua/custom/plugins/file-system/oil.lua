@@ -3,7 +3,11 @@ return {
   dependencies = { 'nvim-tree/nvim-web-devicons' },
   ---@module 'oil'
   ---@type oil.SetupOpts
-  opts = {},
+  opts = {
+    view_options = {
+      show_hidden = true,
+    },
+  },
   keys = {
     {
       '-',
