@@ -9,6 +9,12 @@ return {
       sources = {
         explorer = {
           auto_close = true,
+          hidden = true,
+          ignored = false,
+        },
+        files = {
+          hidden = true,
+          ignored = false,
         },
       },
     },
