@@ -6,6 +6,11 @@ return {
     indent = {},
     notifier = {},
     picker = {
+      main = {
+        -- Ensure picker uses current buffer, regardless of what type it is
+        -- (see https://github.com/folke/snacks.nvim/issues/1517#issuecomment-2757100832)
+        file = false,
+      },
       sources = {
         explorer = {
           auto_close = true,
