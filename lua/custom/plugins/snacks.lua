@@ -1,5 +1,7 @@
 return {
   'folke/snacks.nvim',
+  ---@module 'snacks'
+  ---@type snacks.Config
   opts = {
     explorer = {},
     gitbrowse = {},
@@ -7,9 +9,8 @@ return {
     notifier = {},
     picker = {
       main = {
-        -- Ensure picker uses current buffer, regardless of what type it is
-        -- (see https://github.com/folke/snacks.nvim/issues/1517#issuecomment-2757100832)
-        file = false,
+        -- Allow any window to be used as the main window.
+        current = true,
       },
       sources = {
         explorer = {
