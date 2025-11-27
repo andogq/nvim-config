@@ -10,6 +10,7 @@ return {
       javascriptreact = { 'eslint_d' },
       markdown = { 'markdownlint' },
       python = { 'djlint' },
+      typescript = { 'eslint_d' },
       typescriptreact = { 'eslint_d' },
     }
 
