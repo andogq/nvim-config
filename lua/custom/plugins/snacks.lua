@@ -181,6 +181,13 @@ return {
       desc = 'Find [n]otifications',
     },
     {
+      '<leader>fp',
+      function()
+        Snacks.picker.projects()
+      end,
+      desc = 'Find [p]rojects',
+    },
+    {
       '<leader><leader>',
       function()
         Snacks.picker.smart()
