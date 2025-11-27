@@ -5,12 +5,6 @@ return {
       'nvim-lua/plenary.nvim',
       'sindrets/diffview.nvim',
     },
-    opts = {
-      kind = 'floating',
-      commit_editor = {
-        kind = 'floating',
-      },
-    },
     keys = {
       {
         '<leader>gg',
