@@ -1,3 +1,8 @@
+IGNORE_GLOBS = {
+  '**/*.lock',
+  '**/package-lock.json',
+}
+
 return {
   'folke/snacks.nvim',
   ---@module 'snacks'
@@ -148,14 +153,14 @@ return {
     {
       '<leader>fw',
       function()
-        Snacks.picker.grep_word()
+        Snacks.picker.grep_word { exclude = IGNORE_GLOBS }
       end,
       desc = 'Find [w]ord',
     },
     {
       '<leader>fg',
       function()
-        Snacks.picker.grep()
+        Snacks.picker.grep { exclude = IGNORE_GLOBS }
       end,
       desc = 'Find by [g]rep',
     },
