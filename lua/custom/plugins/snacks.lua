@@ -27,6 +27,9 @@ return {
           hidden = true,
           ignored = false,
         },
+        projects = {
+          dev = { '~/code' },
+        },
       },
     },
   },
