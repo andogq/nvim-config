@@ -8,6 +8,7 @@ return {
       ghaction = { 'actionlint' },
       javascript = { 'eslint_d' },
       javascriptreact = { 'eslint_d' },
+      svelte = { 'eslint_d' },
       markdown = { 'markdownlint' },
       python = { 'djlint' },
       typescript = { 'eslint_d' },

@@ -1,6 +1,8 @@
 return {
   'NMAC427/guess-indent.nvim',
-  opts = {},
+  opts = {
+    auto_cmd = true,
+  },
   keys = {
     {
       '<leader>ai',
