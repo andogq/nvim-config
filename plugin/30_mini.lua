@@ -118,8 +118,6 @@ Config.later(
 
 Config.later(function() require("mini.git").setup() end)
 
-Config.later(function() require("mini.jump").setup() end)
-
 Config.later(function() require("mini.pairs").setup() end)
 
 -- UI =========================================================================
