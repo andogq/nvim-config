@@ -40,6 +40,11 @@ end)
 Config.now(function()
     local miniclue = require("mini.clue")
     miniclue.setup({
+        window = {
+            config = {
+                width = 50,
+            },
+        },
         triggers = {
             -- Leader triggers
             { mode = { "n", "x" }, keys = "<Leader>" },
