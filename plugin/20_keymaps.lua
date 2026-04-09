@@ -101,13 +101,16 @@ nmap_leader("fS", '<cmd>Pick lsp scope="document_symbol"<cr>', "Symbols (current
 
 -- Git
 local git_log_format = [[format:\%h\ \%as\ │\ \%s]]
-nmap_leader("gd", "<cmd>Git diff<cr>", "Diff")
 nmap_leader("gc", "<cmd>Git commit -v<cr>", "Commit")
 nmap_leader("gC", "<cmd>Git commit -v --amend<cr>", "Commit amend")
+nmap_leader("gd", "<cmd>Git diff<cr>", "Diff")
 nmap_leader("gD", "<cmd>Git diff -- %<cr>", "Diff (current file)")
+nmap_leader("gfP", "<cmd>Git push --force-with-lease<cr>", "Push (force with lease)")
 nmap_leader("gl", "<cmd>Git log --pretty=" .. git_log_format .. " --topo-order<cr>", "Log")
 nmap_leader("gL", "<cmd>Git log --pretty=" .. git_log_format .. " --topo-order --follow -- %<cr>", "Log (current file)")
 nmap_leader("go", function() MiniDiff.toggle_overlay() end, "Toggle overlay")
+nmap_leader("gp", "<cmd>Git pull<cr>", "Pull")
+nmap_leader("gP", "<cmd>Git push<cr>", "Push")
 nmap_leader("gs", function() MiniGit.show_at_cursor() end, "Show at cursor")
 xmap_leader("gs", function() MiniGit.show_at_cursor() end, "Show at selection")
 
