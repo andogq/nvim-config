@@ -119,6 +119,7 @@ nmap_leader("lf", function() require("conform").format({ async = true }) end, "F
 xmap_leader("lf", function() require("conform").format({ async = true }) end, "Format range")
 nmap_leader("li", '<cmd>Pick lsp scope="implementation"<cr>', "Implementation")
 nmap_leader("lr", '<cmd>Pick lsp scope="references"<cr>', "References")
+nmap_leader("lR", function() vim.lsp.buf.rename() end, "Rename")
 nmap_leader("lt", '<cmd>Pick lsp scope="type_definition"<cr>', "Type definition")
 
 -- Session
