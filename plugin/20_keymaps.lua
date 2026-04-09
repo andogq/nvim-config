@@ -22,6 +22,9 @@ vim.keymap.set({ "o", "x" }, "R", function() require("flash").treesitter_search(
     desc = "Treesitter Search",
 })
 
+-- Search
+vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear hlsearch" })
+
 -- Split navigation
 local set_split_keymap = function(key, direction)
     -- Alt + direction to move
