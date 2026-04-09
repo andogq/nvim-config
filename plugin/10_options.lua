@@ -16,6 +16,7 @@ vim.cmd("syntax enable")
 vim.cmd("colorscheme tokyonight") -- Configure colorscheme
 
 vim.o.completetimeout = 100 -- Limit timeout for completion
+vim.o.guifont = "FiraCode Nerd Font Mono Ret:h12"
 vim.o.list = true -- Show text indicators
 vim.o.number = true -- Show line numbers
 vim.o.pumborder = "bold" -- Use border for popup menu
@@ -29,6 +30,9 @@ vim.o.showmode = false -- Don't show current mode
 vim.o.signcolumn = "yes" -- Always show sign column
 vim.o.termguicolors = true -- Use 24-bit color
 vim.o.winborder = "bold" -- Show border on floating windows
+
+-- Neovide configuration
+vim.g.neovide_input_macos_option_key_is_meta = "both"
 
 -- Line break configuration
 vim.o.breakindent = true -- Indent wrapped lines
