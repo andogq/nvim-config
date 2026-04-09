@@ -45,6 +45,14 @@ set_split_keymap("j", "down")
 set_split_keymap("k", "up")
 set_split_keymap("l", "right")
 
+-- Terminal
+vim.keymap.set(
+    "t",
+    "<C-space>",
+    [[<C-\><C-n>]],
+    { desc = "Exit insert mode in terminal", silent = true, noremap = true }
+)
+
 -- Leader mappings ============================================================
 -- Helper to create a keymap prefixed by leader key
 local map_leader = function(mode, suffix, rhs, desc) vim.keymap.set(mode, "<leader>" .. suffix, rhs, { desc = desc }) end
