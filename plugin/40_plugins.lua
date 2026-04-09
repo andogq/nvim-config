@@ -117,6 +117,15 @@ Config.later(function()
     })
 end)
 
+-- Terminal ===================================================================
+Config.now(function()
+    vim.pack.add({ "https://github.com/willothy/flatten.nvim" })
+    require("flatten").setup({
+        nest_if_no_args = true,
+        nest_if_cmds = true,
+    })
+end)
+
 -- UI =========================================================================
 Config.later(function()
     vim.pack.add({ "https://github.com/mrjones2014/smart-splits.nvim" })
