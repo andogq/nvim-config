@@ -1,7 +1,12 @@
 -- Basic mappings =============================================================
 
 -- File browsing
-vim.keymap.set({ "n" }, "-", function() MiniFiles.open() end, { desc = "Open file explorer" })
+vim.keymap.set(
+    { "n" },
+    "-",
+    function() MiniFiles.open(vim.api.nvim_buf_get_name(0)) end,
+    { desc = "Open file explorer" }
+)
 
 -- Flash
 vim.keymap.set({ "n", "x", "o" }, "s", function() require("flash").jump() end, {
