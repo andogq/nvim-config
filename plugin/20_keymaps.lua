@@ -102,8 +102,8 @@ nmap_leader("fS", '<cmd>Pick lsp scope="document_symbol"<cr>', "Symbols (current
 -- Git
 local git_log_format = [[format:\%h\ \%as\ │\ \%s]]
 nmap_leader("gd", "<cmd>Git diff<cr>", "Diff")
-nmap_leader("gc", "<cmd>Git commit<cr>", "Commit")
-nmap_leader("gC", "<cmd>Git commit --amend<cr>", "Commit amend")
+nmap_leader("gc", "<cmd>Git commit -v<cr>", "Commit")
+nmap_leader("gC", "<cmd>Git commit -v --amend<cr>", "Commit amend")
 nmap_leader("gD", "<cmd>Git diff -- %<cr>", "Diff (current file)")
 nmap_leader("gl", "<cmd>Git log --pretty=" .. git_log_format .. " --topo-order<cr>", "Log")
 nmap_leader("gL", "<cmd>Git log --pretty=" .. git_log_format .. " --topo-order --follow -- %<cr>", "Log (current file)")
