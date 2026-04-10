@@ -24,6 +24,7 @@ Config.now(function()
         "diff",
         "go",
         "html",
+        "htmldjango",
         "javascript",
         "json",
         "python",
