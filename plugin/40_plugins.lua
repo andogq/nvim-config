@@ -31,6 +31,7 @@ Config.now(function()
         "regex",
         "rst",
         "rust",
+        "svelte",
         "toml",
         "tsx",
         "typescript",
