@@ -50,7 +50,9 @@ Config.now(function()
 
     vim.lsp.enable({
         "html",
-        "lua_ls",
+        "jsonls",
+        "lua_language_server",
+        "postgres_lsp",
         "rust_analyzer",
         "svelte",
         "ts_ls",
