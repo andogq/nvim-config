@@ -31,10 +31,12 @@ Config.now(function()
         "regex",
         "rst",
         "rust",
+        "sql",
         "svelte",
         "toml",
         "tsx",
         "typescript",
+        "typescriptreact",
         "yaml",
     }
 
