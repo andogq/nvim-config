@@ -67,6 +67,9 @@ Config.leader_group_clues = {
     { mode = "n", keys = "<leader>c", desc = "Config" },
     { mode = "n", keys = "<leader>f", desc = "Find" },
     { mode = "n", keys = "<leader>g", desc = "Git" },
+    { mode = "n", keys = "<leader>gb", desc = "Branch" },
+    { mode = "n", keys = "<leader>gf", desc = "Fetch" },
+    { mode = "n", keys = "<leader>gF", desc = "Force" },
     { mode = "n", keys = "<leader>l", desc = "LSP/Language" },
     { mode = "n", keys = "<leader>s", desc = "Split" },
     { mode = "n", keys = "<leader>st", desc = "Split Terminal" },
@@ -109,16 +112,36 @@ nmap_leader("fS", '<cmd>Pick lsp scope="document_symbol"<cr>', "Symbols (current
 
 -- Git
 local git_log_format = [[format:\%h\ \%as\ │\ \%s]]
+nmap_leader("gbb", function()
+    local branch_name = MiniExtra.pickers.git_branches()
+    if branch_name ~= nil then vim.cmd("Git checkout " .. branch_name) end
+end, "Checkout")
+nmap_leader("gbc", function()
+    local branch_name = vim.fn.input("New branch name: ")
+    if branch_name ~= nil then vim.cmd("Git checkout -b " .. branch_name) end
+end, "Create")
 nmap_leader("gc", "<cmd>Git commit -v<cr>", "Commit")
 nmap_leader("gC", "<cmd>Git commit -v --amend<cr>", "Commit amend")
 nmap_leader("gd", "<cmd>Git diff<cr>", "Diff")
 nmap_leader("gD", "<cmd>Git diff -- %<cr>", "Diff (current file)")
-nmap_leader("gfP", "<cmd>Git push --force-with-lease<cr>", "Push (force with lease)")
+nmap_leader("gff", "<cmd>Git fetch --all<cr>", "fetch")
+nmap_leader("gFP", "<cmd>Git push --force-with-lease<cr>", "Push (force with lease)")
 nmap_leader("gl", "<cmd>Git log --pretty=" .. git_log_format .. " --topo-order<cr>", "Log")
 nmap_leader("gL", "<cmd>Git log --pretty=" .. git_log_format .. " --topo-order --follow -- %<cr>", "Log (current file)")
 nmap_leader("go", function() MiniDiff.toggle_overlay() end, "Toggle overlay")
 nmap_leader("gp", "<cmd>Git pull<cr>", "Pull")
 nmap_leader("gP", "<cmd>Git push<cr>", "Push")
+nmap_leader("gr", "<cmd>Git rebase --interactive --autosquash<cr>", "Rebase (upstream)")
+nmap_leader("gR", function()
+    local target = MiniPick.builtin.cli({
+        command = {
+            "bash",
+            "-c",
+            "git --no-pager log '--format=format:%h %s' && git --no-pager branch -a --format='%(refname:short)'",
+        },
+    })
+    if target ~= nil then vim.cmd("Git rebase --interactive --autosquash " .. target) end
+end, "Rebase")
 nmap_leader("gs", function() MiniGit.show_at_cursor() end, "Show at cursor")
 xmap_leader("gs", function() MiniGit.show_at_cursor() end, "Show at selection")
 
