@@ -167,24 +167,34 @@ Config.later(function()
     require("mini.pick").setup()
 
     MiniPick.registry.projects = function()
-        -- Find all git repositories within ~/code (limiting search to 2 nested directories)
-        local find_cmd = {
-            "find",
-            vim.fn.expand("~/code"),
-            "-maxdepth",
-            "2",
-            "-type",
-            "d",
-            "-exec",
-            "test",
-            "-e",
-            "{}/.git",
-            ";",
-            "-print",
-            "-prune",
-        }
-        local items = vim.schedule_wrap(function() MiniPick.set_picker_items_from_cli(find_cmd) end)
-        return MiniPick.start({ source = { items = items, name = "Projects" } })
+        local project = MiniPick.builtin.cli({
+            -- Find all git repositories within ~/code (limiting search to 2 nested directories).
+            command = {
+                "find",
+                vim.fn.expand("~/code"),
+                "-maxdepth",
+                "2",
+                "-type",
+                "d",
+                "-exec",
+                "test",
+                "-e",
+                "{}/.git",
+                ";",
+                "-print",
+                "-prune",
+            },
+        }, {
+            source = {
+                choose = function() end,
+            },
+        })
+
+        if project == nil then return end
+
+        -- Change into the project and start selecting files.
+        vim.cmd("cd " .. project)
+        return MiniPick.builtin.files()
     end
 end)
 
