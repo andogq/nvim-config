@@ -113,8 +113,20 @@ nmap_leader("fS", '<cmd>Pick lsp scope="document_symbol"<cr>', "Symbols (current
 -- Git
 local git_log_format = [[format:\%h\ \%as\ │\ \%s]]
 nmap_leader("gbb", function()
-    local branch_name = MiniExtra.pickers.git_branches()
-    if branch_name ~= nil then vim.cmd("Git checkout " .. branch_name) end
+    local get_branch_name = function(item) return item:match("^%*?%s*(%S+)") end
+    local item = MiniPick.builtin.cli({
+        command = {
+            "git",
+            "branch",
+            "-v",
+            "--no-color",
+            "--list",
+            "--sort=-committerdate",
+        },
+    })
+    if item == nil then return end
+    local branch = get_branch_name(item)
+    vim.cmd("Git checkout " .. branch)
 end, "Checkout")
 nmap_leader("gbc", function()
     local branch_name = vim.fn.input("New branch name: ")
@@ -133,14 +145,16 @@ nmap_leader("gp", "<cmd>Git pull<cr>", "Pull")
 nmap_leader("gP", "<cmd>Git push<cr>", "Push")
 nmap_leader("gr", "<cmd>Git rebase --interactive --autosquash<cr>", "Rebase (upstream)")
 nmap_leader("gR", function()
-    local target = MiniPick.builtin.cli({
+    local item = MiniPick.builtin.cli({
         command = {
             "bash",
             "-c",
             "git --no-pager log '--format=format:%h %s' && git --no-pager branch -a --format='%(refname:short)'",
         },
     })
-    if target ~= nil then vim.cmd("Git rebase --interactive --autosquash " .. target) end
+    if item == nil then return end
+    local target = item:match("^%*?%s*(%S+)")
+    vim.cmd("Git rebase --interactive --autosquash " .. target)
 end, "Rebase")
 nmap_leader("gs", function() MiniGit.show_at_cursor() end, "Show at cursor")
 xmap_leader("gs", function() MiniGit.show_at_cursor() end, "Show at selection")
