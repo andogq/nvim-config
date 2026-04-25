@@ -56,13 +56,54 @@ Config.now(function()
         "jsonls",
         "lua_language_server",
         "postgres_lsp",
-        "rust_analyzer",
         "svelte",
         "ts_ls",
     })
 end)
 
 -- Other language support =====================================================
+Config.later(function()
+    vim.pack.add({
+        {
+            src = "https://github.com/mrcjkb/rustaceanvim",
+            version = vim.version.range("^9"),
+        },
+    })
+
+    vim.g.rustaceanvim = {
+        server = {
+            default_settings = {
+                ["rust-analyzer"] = {
+                    cargo = {
+                        features = "all",
+                        buildScripts = {
+                            enable = true,
+                        },
+                    },
+                    check = {
+                        command = "clippy",
+                        extraArgs = { "--no-deps" },
+                    },
+                    procMacro = {
+                        enable = true,
+                        ignored = {
+                            ["async-trait"] = { "async_trait" },
+                            ["napi-derive"] = { "napi" },
+                            ["async-recursion"] = { "async_recursion" },
+                        },
+                    },
+                    inlayHints = {
+                        lifetimeElisionHints = {
+                            enable = true,
+                            useParameterNames = true,
+                        },
+                    },
+                },
+            },
+        },
+    }
+end)
+
 Config.later(function()
     vim.pack.add({ "https://github.com/stevearc/conform.nvim" })
 
