@@ -64,8 +64,6 @@ vim.opt.listchars = {
 }
 
 -- Folds
-vim.o.foldlevel = 1 -- Fold everything except top level
-vim.o.foldmethod = "indent" -- Fold based on indent level
 vim.o.foldnestmax = 10 -- Limit number of fold levels
 vim.o.foldtext = "" -- Show text under fold
 
