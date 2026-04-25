@@ -44,7 +44,8 @@ Config.now(function()
     treesitter.install(ensure_languages, { summary = true })
 
     -- Enable parser on buffer attach
-    Config.new_autocmd("FileType", ensure_languages, function() vim.treesitter.start() end)
+    local filetypes = vim.iter(ensure_languages):map(vim.treesitter.language.get_filetypes):flatten():totable()
+    Config.new_autocmd("FileType", filetypes, function() vim.treesitter.start() end)
 end)
 
 Config.now(function()
